@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ALLA QUEEN — MNENIE | Listen everywhere</title>
+  <meta name="description" content="ALLA QUEEN — MNENIE. Выбери свою платформу: Apple Music, Spotify, YouTube Music, Deezer, TIDAL, Amazon Music, VK Музыка, Яндекс Музыка." />
+  <link rel="canonical" href="https://allaqueen.github.io/mnenie/" />
+  <link rel="icon" href="/favicon.png">
+  <meta name="theme-color" content="#8A2BE2" />
+
+  <meta property="og:title" content="ALLA QUEEN — MNENIE" />
+  <meta property="og:description" content="Новый сингл — слушай на любимой платформе." />
+  <meta property="og:type" content="music.song" />
+  <meta property="og:url" content="https://allaqueen.github.io/mnenie/" />
+  <meta property="og:image" content="https://allaqueen.github.io/mnenie/cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ALLA QUEEN — MNENIE" />
+  <meta name="twitter:description" content="Новый сингл — слушай на любимой платформе." />
+  <meta name="twitter:image" content="https://allaqueen.github.io/mnenie/cover.jpg" />
+
+  <style>
+    :root{
+      --bg1:#0f0c29; --bg2:#302b63; --bg3:#24243e;
+      --card: rgba(255,255,255,.08);
+      --text:#fff; --muted: #d7d7e9;
+      --accent:#a78bfa; --accent2:#e879f9; --ring: rgba(167,139,250,.4);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 90% -10%, rgba(232,121,249,.15), transparent 60%),
+                  radial-gradient(900px 500px at 10% 110%, rgba(167,139,250,.18), transparent 60%),
+                  linear-gradient(135deg, var(--bg1), var(--bg2) 50%, var(--bg3));
+      min-height:100svh; display:flex; align-items:center; justify-content:center; padding: 32px 18px;
+    }
+    .wrap{ width:min(760px, 100%); }
+    .card{ background:var(--card); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,.12); border-radius:28px; box-shadow:var(--shadow); padding:clamp(20px,3.4vw,32px) }
+    .top{ display:flex; gap:18px; align-items:center; }
+    .cover{ width:104px; height:104px; border-radius:20px; overflow:hidden; flex:0 0 auto; border:1px solid rgba(255,255,255,.18) }
+    .cover img{ width:100%; height:100%; object-fit:cover }
+    .title{font-weight:800; font-size:clamp(22px,4.5vw,34px); letter-spacing:.2px;}
+    .subtitle{color:var(--muted); font-size:clamp(13px,2.2vw,15px); margin-top:6px}
+    .cta{ margin-top:14px; display:flex; gap:8px; flex-wrap:wrap }
+    .cta button{ background:linear-gradient(90deg, var(--accent), var(--accent2)); color:#111; border:none; padding:10px 14px; border-radius:999px; font-weight:700; cursor:pointer; box-shadow: var(--shadow); }
+    .grid{margin-top:20px; display:grid; gap:12px}
+    @media (min-width:560px){ .grid{grid-template-columns:1fr 1fr} }
+    a.btn{ display:flex; gap:12px; align-items:center; justify-content:center; text-decoration:none; padding:14px; border-radius:16px; border:1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.06); transition: transform .06s ease, background .2s ease, border-color .2s ease; font-weight:700; color:var(--text); }
+    a.btn:hover{ transform: translateY(-1px); border-color: var(--ring); background: rgba(255,255,255,.10)}
+    .muted{color:var(--muted); font-weight:600}
+    footer{margin-top:18px; font-size:12px; color:var(--muted); text-align:center}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div class="top">
+        <div class="cover"><img src="./cover.jpg" alt="ALLA QUEEN — MNENIE cover"></div>
+        <div>
+          <div class="title">ALLA QUEEN — <span style="color:#e9d5ff">MNENIE</span></div>
+          <div class="subtitle">Сингл доступен везде · выбери платформу и слушай</div>
+          <div class="cta">
+            <button id="copy">Скопировать ссылку</button>
+            <button id="share">Поделиться</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid" id="links"></div>
+
+      <footer class="muted">© 2025 ALLA QUEEN — MNENIE</footer>
+    </section>
+  </main>
+
+  <script>
+    const LINKS = {
+      appleMusic: "https://music.apple.com/in/album/mnenie-single/1835534962",
+      spotify: "https://open.spotify.com/search/ALLA%20QUEEN%20Mnenie",
+      youtubeMusic: "https://music.youtube.com/playlist?list=OLAK5uy_npVIHoEEpYgggZujO7o27ntUReOztGLgU",
+      deezer: "https://www.deezer.com/search/ALLA%20QUEEN%20Mnenie",
+      tidal: "https://tidal.com/search?query=ALLA%20QUEEN%20Mnenie",
+      amazon: "https://music.amazon.es/artists/B0DYPKH6G9/alla-queen",
+      vk: "https://vk.com/search?c%5Bq%5D=ALLA%20QUEEN%20Mnenie&c%5Bsection%5D=audio",
+      yandex: "https://music.yandex.ru/search?text=ALLA%20QUEEN%20Mnenie"
+    };
+
+    const LABELS = {
+      appleMusic: " Apple Music",
+      spotify: "🎧 Spotify",
+      youtubeMusic: "▶️ YouTube Music",
+      deezer: "🎵 Deezer",
+      tidal: "🔊 TIDAL",
+      amazon: "🅰️ Amazon Music",
+      vk: "VK Музыка",
+      yandex: "Яндекс Музыка"
+    };
+
+    const order = ["appleMusic","spotify","youtubeMusic","deezer","tidal","amazon","vk","yandex"];
+    const $links = document.getElementById('links');
+    const utm = "?utm_source=linkinbio&utm_medium=githubpages&utm_campaign=mnenie";
+
+    order.forEach(key => {
+      let href = LINKS[key];
+      if(!href) return;
+      if(/^(https?:)?\/\//.test(href)) href += utm;
+      const a = document.createElement('a');
+      a.className = 'btn'; a.href = href; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = LABELS[key] || key;
+      $links.appendChild(a);
+    });
+
+    document.getElementById('copy').onclick = () => {
+      navigator.clipboard.writeText(location.href);
+      const b = document.getElementById('copy'); b.textContent = 'Ссылка скопирована'; setTimeout(()=> b.textContent='Скопировать ссылку', 1600);
+    };
+    document.getElementById('share').onclick = () => {
+      if(navigator.share){ navigator.share({title:'ALLA QUEEN — MNENIE', text:'Слушай новый сингл', url:location.href}); }
+      else { alert('Поделиться можно через кнопку копирования ссылки.'); }
+    };
+  </script>
+</body>
+</html>
